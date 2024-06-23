@@ -3,53 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Library Visit Registration</title>
+    <title>Admin Login</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #f1f0f0;
-            padding: 20px;
-            margin: 0;
             display: flex;
-            flex-direction: column;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
+            padding-top: 50px;
             height: 100vh;
-            position: relative;
+            margin: 0;
+            background: #f1f0f0;
+            color: white;
         }
-        .form-container {
+        .login-container {
             background: white;
             padding: 40px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 400px;
             box-sizing: border-box;
             text-align: center;
             color: black;
         }
-        .form-container img {
-            max-width: 150px; /* Adjust the size as needed */
+        .login-container img {
+            max-width: 150px; /* Increased logo size */
             margin-bottom: 20px;
         }
-        .form-container h2 {
-            text-align: center;
-            margin-bottom: 20px;
+        .login-container h2 {
+            margin: 0 0 20px;
+            font-size: 24px;
             color: #333;
         }
-        .form-container input {
+        .login-container .icon-input-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .login-container .icon-input-container input {
             display: block;
             width: 100%;
-            margin: 10px 0;
-            padding: 10px;
+            padding: 10px 40px 10px 40px;
             font-size: 16px;
-            box-sizing: border-box;
             border: 1px solid #ddd;
             border-radius: 5px;
+            box-sizing: border-box;
         }
-        .form-container button {
+        .login-container .icon-input-container .icon {
+            position: absolute;
+            left: 10px;
+            top: 80%; /* Adjusted icon position to 80% */
+            transform: translateY(-50%);
+            font-size: 18px;
+            color: #6a11cb;
+        }
+        .login-container .icon-input-container .icon img {
+            max-width: 20px; /* Adjust size as needed */
+        }
+        .login-container button {
             width: 100%;
-            padding: 10px;
+            padding: 8px;
             background: linear-gradient(to right, #6a11cb, #2575fc, #e100ff);
             color: white;
             border: none;
@@ -59,33 +71,40 @@
             margin-top: 20px;
             transition: background 0.3s ease;
         }
-        .form-container button:hover {
+        .login-container button:hover {
             background: linear-gradient(to right, #e100ff, #2575fc, #6a11cb);
         }
-        .form-container a {
+        .login-container .forgot-password {
             display: block;
-            text-align: center;
-            margin-top: 20px;
+            margin-top: 10px;
             text-decoration: none;
             color: #007BFF;
-            font-size: 16px;
+            font-size: 14px;
         }
         footer {
+            position: absolute;
+            bottom: 10px;
             text-align: center;
             width: 100%;
             color: rgb(0, 0, 0);
-            margin-top: 20px;
         }
         @media (max-width: 600px) {
-            .form-container {
-                padding: 15px;
+            body {
+                background: white;
             }
-            .form-container h2 {
-                font-size: 18px;
+            .login-container {
+                background: white;
+                color: black;
             }
-            .form-container input, .form-container button, .form-container a {
-                padding: 8px;
-                font-size: 14px;
+            .login-container h2, .login-container .forgot-password {
+                color: #333;
+            }
+            .login-container .icon-input-container input {
+                background: white;
+                color: black;
+            }
+            .login-container .icon {
+                color: #6a11cb;
             }
             footer {
                 color: black;
@@ -94,58 +113,38 @@
     </style>
 </head>
 <body>
-    <div class="form-container">
+    <div class="login-container">
         <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgUakzHeOGhesnTKBMsLbmthDVm-emApFqLPOj_b1iJvtUVJL7bxjPa5RXc8Iv4GEEIMPRp63hkKxCg4t56AMm50WpW8tMVN2FVeCqIiZdeArVmyQI1vTTw3hHgzqJc6DyzehXZkwUo84vAoeVjCNBWpLasUw71ZAR7RyYtqCUYdRlR1SNrhG0UpOIw8ZFx/s320/image-removebg-preview.png" alt="Logo">
-        <h2>Register Student Visit</h2>
-        <input type="text" id="student-name" placeholder="Student Name">
-        <input type="text" id="student-id" placeholder="Student ID">
-        <input type="email" id="email-id" placeholder="Email ID">
-        <input type="text" id="branch" placeholder="Branch">
-        <input type="datetime-local" id="visit-datetime" placeholder="Visit Date and Time">
-        <input type="text" id="book-name" placeholder="Book Name (optional)">
-        <button onclick="addStudentVisit()">Add Visit</button>
-        <a href="students.html">View Student Visits</a>
+        <h2>Admin Login</h2>
+        <div class="icon-input-container">
+            <span class="icon">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgUp2zluTsEDSr55aD0wXWvH2kUa4f2UcTL1MxEFhqSA7g3ElAPVy6DdMGgpPu9PqJ_sHr3htYPDT9fBm0z_l7PzNCkPmEAhMbY2ItSB2NyZbpULTQJDtSFfmOm_Oa6sNdoh35kPL5h26kIAYp-bdnt2vfXgCPqr2hnwVFQ0aQ1xBwZ2eWYmYlLYdCC8o-T/s1600/icons8-username-50.png" alt="Username Icon">
+            </span>
+            <input type="text" id="username" placeholder="Username">
+        </div>
+        <div class="icon-input-container">
+            <span class="icon">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjAr9L5iIUi_m9AMfaqy1DbazEcNVE82PaJWVvvTRriqtT-IBhircVKYzvjCiV_phu0khXb7Dh06x1jWfCXGJPxrA9xbbn3PeNq6x22AHA7fk0EQGGmqxrJ5BUszLMaz0dKNDhi7VTLyzvwzXMCSwLwyGh6BP6mNdr1cB3k_tGv2VLpU9JMRie4_1jTw8rO/s1600/icons8-password-50-transformed.png" alt="Password Icon">
+            </span>
+            <input type="password" id="password" placeholder="Password">
+        </div>
+        <a href="#" class="forgot-password" onclick="forgotPassword()">Forgot password?</a>
+        <button onclick="login()">LOGIN</button>
     </div>
     <footer>Made with ❤️ by CSE Students</footer>
-    <!-- Include Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
     <script>
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyDvXhZfWSbvujfC87I-p1b_Vy1MyJPhv68",
-            authDomain: "library-visitor-app.firebaseapp.com",
-            databaseURL: "https://library-visitor-app-default-rtdb.firebaseio.com",
-            projectId: "library-visitor-app",
-            storageBucket: "library-visitor-app.appspot.com",
-            messagingSenderId: "633299296943",
-            appId: "1:633299296943:web:2e0da0279acbe8fe0dea5a"
-        };
-
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-
-        async function addStudentVisit() {
-            const name = document.getElementById('student-name').value;
-            const studentId = document.getElementById('student-id').value;
-            const email = document.getElementById('email-id').value;
-            const branch = document.getElementById('branch').value;
-            const visitDatetime = document.getElementById('visit-datetime').value;
-            const bookName = document.getElementById('book-name').value || "No book taken";
-
-            if (name && studentId && email && branch && visitDatetime) {
-                const studentVisit = { name, studentId, email, branch, visitDatetime, bookName };
-                await firebase.database().ref('students').push(studentVisit);
-                alert('Student visit registered successfully');
-                document.getElementById('student-name').value = '';
-                document.getElementById('student-id').value = '';
-                document.getElementById('email-id').value = '';
-                document.getElementById('branch').value = '';
-                document.getElementById('visit-datetime').value = '';
-                document.getElementById('book-name').value = '';
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            if (username === 'SaiPavanGouda' && password === 'Sai@2002') {
+                window.location.href = 'home.html';
             } else {
-                alert('Please fill in all fields');
+                alert('Invalid username or password');
             }
+        }
+
+        function forgotPassword() {
+            alert('Please contact Developer');
         }
     </script>
 </body>
