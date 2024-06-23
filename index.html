@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Library Visit Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f0f0;
+            padding: 20px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+        }
+        .form-container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+            text-align: center;
+            color: black;
+        }
+        .form-container img {
+            max-width: 150px; /* Adjust the size as needed */
+            margin-bottom: 20px;
+        }
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-container input {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(to right, #6a11cb, #2575fc, #e100ff);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s ease;
+        }
+        .form-container button:hover {
+            background: linear-gradient(to right, #e100ff, #2575fc, #6a11cb);
+        }
+        .form-container a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007BFF;
+            font-size: 16px;
+        }
+        footer {
+            text-align: center;
+            width: 100%;
+            color: rgb(0, 0, 0);
+            margin-top: 20px;
+        }
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 15px;
+            }
+            .form-container h2 {
+                font-size: 18px;
+            }
+            .form-container input, .form-container button, .form-container a {
+                padding: 8px;
+                font-size: 14px;
+            }
+            footer {
+                color: black;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgUakzHeOGhesnTKBMsLbmthDVm-emApFqLPOj_b1iJvtUVJL7bxjPa5RXc8Iv4GEEIMPRp63hkKxCg4t56AMm50WpW8tMVN2FVeCqIiZdeArVmyQI1vTTw3hHgzqJc6DyzehXZkwUo84vAoeVjCNBWpLasUw71ZAR7RyYtqCUYdRlR1SNrhG0UpOIw8ZFx/s320/image-removebg-preview.png" alt="Logo">
+        <h2>Register Student Visit</h2>
+        <input type="text" id="student-name" placeholder="Student Name">
+        <input type="text" id="student-id" placeholder="Student ID">
+        <input type="email" id="email-id" placeholder="Email ID">
+        <input type="text" id="branch" placeholder="Branch">
+        <input type="datetime-local" id="visit-datetime" placeholder="Visit Date and Time">
+        <input type="text" id="book-name" placeholder="Book Name (optional)">
+        <button onclick="addStudentVisit()">Add Visit</button>
+        <a href="students.html">View Student Visits</a>
+    </div>
+    <footer>Made with ❤️ by CSE Students</footer>
+    <!-- Include Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDvXhZfWSbvujfC87I-p1b_Vy1MyJPhv68",
+            authDomain: "library-visitor-app.firebaseapp.com",
+            databaseURL: "https://library-visitor-app-default-rtdb.firebaseio.com",
+            projectId: "library-visitor-app",
+            storageBucket: "library-visitor-app.appspot.com",
+            messagingSenderId: "633299296943",
+            appId: "1:633299296943:web:2e0da0279acbe8fe0dea5a"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        async function addStudentVisit() {
+            const name = document.getElementById('student-name').value;
+            const studentId = document.getElementById('student-id').value;
+            const email = document.getElementById('email-id').value;
+            const branch = document.getElementById('branch').value;
+            const visitDatetime = document.getElementById('visit-datetime').value;
+            const bookName = document.getElementById('book-name').value || "No book taken";
+
+            if (name && studentId && email && branch && visitDatetime) {
+                const studentVisit = { name, studentId, email, branch, visitDatetime, bookName };
+                await firebase.database().ref('students').push(studentVisit);
+                alert('Student visit registered successfully');
+                document.getElementById('student-name').value = '';
+                document.getElementById('student-id').value = '';
+                document.getElementById('email-id').value = '';
+                document.getElementById('branch').value = '';
+                document.getElementById('visit-datetime').value = '';
+                document.getElementById('book-name').value = '';
+            } else {
+                alert('Please fill in all fields');
+            }
+        }
+    </script>
+</body>
+</html>
